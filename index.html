@@ -142,7 +142,8 @@ footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;
 .modal-media{height:200px;position:relative;border-radius:22px 22px 0 0;display:grid;place-items:center;background:var(--project-bg,#0f172a);isolation:isolate;padding:22px}
 .modal-media img{max-width:70%;max-height:150px;object-fit:contain}
 .modal-media .proj-cat{position:absolute}
-.project-card[data-id="p1"],.project-card[data-id="p4"],.modal-media[data-id="p1"],.modal-media[data-id="p4"]{--project-bg:#fff}
+.project-card[data-id="p1"] .proj-media,.project-card[data-id="p4"] .proj-media,.modal-media[data-id="p1"],.modal-media[data-id="p4"]{background:#fff}
+.project-card[data-id="p1"] .proj-media img,.project-card[data-id="p4"] .proj-media img,.modal-media[data-id="p1"] img,.modal-media[data-id="p4"] img{background:#fff;mix-blend-mode:normal}
 .project-card[data-id="p2"],.modal-media[data-id="p2"]{--project-bg:#011027}
 .project-card[data-id="p2"] .proj-media img,.modal-media[data-id="p2"] img{mix-blend-mode:lighten}
 .modal-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:11px;border:1px solid var(--border);background:rgba(13,21,38,.7);color:#fff;cursor:pointer;font-size:1.1rem;z-index:3}
