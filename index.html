@@ -106,7 +106,7 @@ nav.desktop a.active::after{content:'';position:absolute;left:0;bottom:-2px;widt
 .proj-body p{color:var(--muted);font-size:.92rem;margin-bottom:16px;flex:1}
 .proj-feat{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .feat{font-size:.74rem;padding:5px 10px;border-radius:8px;background:var(--panel-solid);border:1px solid var(--border);color:var(--muted)}
-.proj-link{color:var(--accent);font-weight:600;font-size:.9rem}
+.proj-link{color:var(--accent);font-weight:600;font-size:.9rem}.proj-link:hover{text-decoration:underline}#mVisit[hidden]{display:none}
 .timeline{position:relative;max-width:760px;margin:0 auto;padding-left:40px}
 .timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(var(--primary),var(--accent),#ec4899)}
 .t-item{position:relative;padding-bottom:44px}.t-item:last-child{padding-bottom:0}
@@ -299,7 +299,7 @@ footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;
 <div class="modal" id="modal">
   <div class="modal-box">
     <div class="modal-media"><button class="modal-close" id="modalClose">✕</button><img id="mImg" alt=""><span class="proj-cat cat-other" id="mCat">Loyiha</span></div>
-    <div class="modal-body"><h3 id="mTitle"></h3><p class="mdesc" id="mDesc"></p><div class="modal-feat" id="mFeats"></div></div>
+    <div class="modal-body"><h3 id="mTitle"></h3><p class="mdesc" id="mDesc"></p><div class="modal-feat" id="mFeats"></div><a id="mVisit" class="btn btn-primary" target="_blank" rel="noopener noreferrer" hidden>Ilovani ochish ↗</a></div>
   </div>
 </div>
 
@@ -310,7 +310,7 @@ footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;
 
 var AV="https://cdn-chatly-docs.vyro.ai/chatly/ultra-agent/uploads/5bcc98c7-e6ce-4e99-9387-a50f38689645/0debd683-b462-4197-8a3b-48ad7d14d19b.png";
 (function(){var a=document.getElementById("avatarImg");if(a)a.src=AV;})();
-var STORE_KEY="asanbek_portfolio_v3";
+var STORE_KEY="asanbek_portfolio_v4";
 function $(id){return document.getElementById(id);}
 var DEF={
 skills:[{icon:"💻",title:"Dasturlash",tags:["🐍 Python","🟨 JavaScript","🌐 HTML","🎨 CSS","🟢 Node.js","⚡ FastAPI","📱 Flutter"]},{icon:"🤖",title:"AI va Texnologiya",tags:["🧠 Sun'iy intellekt","🔌 AI API lar","✈️ Telegram Botlar","📲 Mini ilovalar","🎞️ AI rasm/video"]},{icon:"🗄️",title:"Ma'lumotlar bazasi",tags:["🐘 PostgreSQL","🗃️ SQLite","⚡ Supabase","🍃 MongoDB"]},{icon:"🚀",title:"Vositalar",tags:["🐙 GitHub","🟠 Replit","🚂 Railway","🖥️ Render","🔗 ngrok"]}],
@@ -318,8 +318,10 @@ tech:["🐍 Python","🟨 JavaScript","🌐 HTML","🎨 CSS","🟢 Node.js","⚡
 interests:[["🩺","Tibbiyot"],["🤖","Sun'iy intellekt"],["👨‍💻","Dasturlash"],["⚽","Futbol"],["♟️","Shaxmat"],["🚀","Startaplar"],["🎬","Kontent"],["🎨","Dizayn"]],
 projects:[
 {id:"p1",title:"MedAI",cat:"med",desc:"O‘zbekiston foydalanuvchilari uchun mo‘ljallangan AI tibbiy yordamchi: simptomlar haqida ma’lumot, dori va laboratoriya tahlillarini tushunishga ko‘mak hamda sog‘liqni kuzatish vositalari. Tibbiy tashxis o‘rnini bosmaydi.",feats:["Simptomlar bo‘yicha yo‘naltiruvchi ma’lumot","Dori haqida ma’lumot","Lab tahlillarini tushuntirish","Eslatma va kuzatuv konsepsiyasi","Flutter + FastAPI yo‘nalishi","Telegram integratsiyasi"],img:"https://cdn-chatly-docs.vyro.ai/chatly/ultra-agent/uploads/b8c19768-a251-43b8-8f0a-001b082c8914/1481cd78-7930-4afd-9452-452fcbd0e3cb.png"},
-{id:"p2",title:"BSMI ANATOMY",cat:"edu",desc:"Tibbiyot talabalari uchun o‘zbek tilidagi raqamli o‘quv muhiti. Anatomiya mavzularini matn, lotin terminlari, video, test va 3D materiallar orqali o‘rganishni qo‘llab-quvvatlashga qaratilgan.",feats:["Anatomiya mavzulari","Lotin terminologiyasi","Video darslar","Mavzuli testlar","3D atlas konsepsiyasi","Ko‘p tilli interfeys"],img:"https://cdn-chatly-docs.vyro.ai/chatly/ultra-agent/uploads/5bcc98c7-e6ce-4e99-9387-a50f38689645/44490498-7289-4854-8877-f94e82030b53.png"},
-{id:"p3",title:"SaNo Books",cat:"ecom",desc:"Kitob va maktab anjomlari savdosini raqamlashtirishga qaratilgan loyiha. Telegram bot, katalog, savatcha, buyurtma jarayoni va boshqaruv vositalari konsepsiyasi.",feats:["Telegram savdo boti","Mahsulot katalogi","Savatcha konsepsiyasi","Buyurtmalarni boshqarish","Admin panel konsepsiyasi","To‘lov integratsiyasi rejalari"],img:"https://cdn-chatly-docs.vyro.ai/chatly/ultra-agent/uploads/5bcc98c7-e6ce-4e99-9387-a50f38689645/c91e8a2d-a692-4c61-a47e-1ab106f2925e.png"}
+{id:"p2",title:"Jarvis Ultra",cat:"other",url:"https://kunlik-reja-two.vercel.app",icon:"🤖",desc:"Android uchun o‘zbekcha ovozli AI yordamchi. “Jarvis” uyg‘otish so‘zi, hands-free boshqaruv, vazifalar, aqlli rejalashtirish, eslatmalar, odatlar va uzoq muddatli xotira bilan ishlaydi. Google Calendar, Gmail, kamera, fayllar, kontaktlar va bildirishnomalar bilan integratsiya imkoniyatlari mavjud.",feats:["Offline Jarvis wake word","O‘zbekcha ovozli buyruqlar","AI agent va 30+ intent","Vazifa, deadline va reminder","Odatlar va aqlli reja","Google Calendar + Gmail","SQLCipher AES-256 xavfsiz baza","Android 12–15"],img:""},
+{id:"p3",title:"LinguaFlow",cat:"edu",url:"https://linguaflow-ecru.vercel.app",icon:"🌍",desc:"O‘zbek tilidagi interfeysga ega ko‘p tilli o‘rganish platformasi. Ingliz, rus, nemis, fransuz, ispan va arab tillari uchun darslar, mashqlar, testlar, o‘yinlar, lug‘at va aqlli takrorlash tizimini birlashtiradi.",feats:["6 ta tilni o‘rganish","A1–C2 darajalariga yo‘nalish","Listening, writing va speaking","Mavzu va daraja testlari","4 ta o‘quv o‘yini","XP, streak va nishonlar","SM-2 asosidagi takrorlash","AI ustoz va admin panel"],img:""},
+{id:"p4",title:"BSMI ANATOMY",cat:"edu",desc:"Tibbiyot talabalari uchun o‘zbek tilidagi raqamli o‘quv muhiti. Anatomiya mavzularini matn, lotin terminlari, video, test va 3D materiallar orqali o‘rganishni qo‘llab-quvvatlashga qaratilgan.",feats:["Anatomiya mavzulari","Lotin terminologiyasi","Video darslar","Mavzuli testlar","3D atlas konsepsiyasi","Ko‘p tilli interfeys"],img:"https://cdn-chatly-docs.vyro.ai/chatly/ultra-agent/uploads/5bcc98c7-e6ce-4e99-9387-a50f38689645/44490498-7289-4854-8877-f94e82030b53.png"},
+{id:"p5",title:"SaNo Books",cat:"ecom",desc:"Kitob va maktab anjomlari savdosini raqamlashtirishga qaratilgan loyiha. Telegram bot, katalog, savatcha, buyurtma jarayoni va boshqaruv vositalari konsepsiyasi.",feats:["Telegram savdo boti","Mahsulot katalogi","Savatcha konsepsiyasi","Buyurtmalarni boshqarish","Admin panel konsepsiyasi","To‘lov integratsiyasi rejalari"],img:"https://cdn-chatly-docs.vyro.ai/chatly/ultra-agent/uploads/5bcc98c7-e6ce-4e99-9387-a50f38689645/c91e8a2d-a692-4c61-a47e-1ab106f2925e.png"}
 ],
 contacts:[
 {id:"c1",name:"Telegram",url:"https://t.me/asadbek_yt",icon:"✈️"},
@@ -346,11 +348,12 @@ function renderProjects(){
   var p=$("projGrid");p.innerHTML="";
   DATA.projects.forEach(function(pr){
     if(curFilter&&catKey(pr.cat)!==curFilter)return;
-    var img=pr.img?'<img src="'+pr.img+'" alt="'+ESC(pr.title)+'">':'<span style="font-size:4rem;opacity:.6">🚀</span>';
+    var img=pr.img?'<img src="'+pr.img+'" alt="'+ESC(pr.title)+'">':'<span style="font-size:4rem;opacity:.75">'+(pr.icon||"🚀")+'</span>';
     var f=pr.feats.slice(0,3).map(function(x){return '<span class="feat">'+ESC(x)+'</span>';}).join("");
-    p.insertAdjacentHTML("beforeend",'<article class="project-card" data-id="'+pr.id+'"><div class="proj-media"><span class="proj-cat '+catCls(pr.cat)+'">'+catLbl(pr.cat)+'</span>'+img+'</div><div class="proj-body"><h3>'+ESC(pr.title)+'</h3><p>'+ESC(pr.desc)+'</p><div class="proj-feat">'+f+'</div><span class="proj-link">Batafsil →</span></div></article>');
+    var action=pr.url?'<a class="proj-link" href="'+pr.url+'" target="_blank" rel="noopener noreferrer" data-external>Ilovani ochish ↗</a>':'<span class="proj-link">Batafsil →</span>';
+    p.insertAdjacentHTML("beforeend",'<article class="project-card" data-id="'+pr.id+'"><div class="proj-media"><span class="proj-cat '+catCls(pr.cat)+'">'+catLbl(pr.cat)+'</span>'+img+'</div><div class="proj-body"><h3>'+ESC(pr.title)+'</h3><p>'+ESC(pr.desc)+'</p><div class="proj-feat">'+f+'</div>'+action+'</div></article>');
   });
-  [].forEach.call(p.children,function(c){c.onclick=function(){openModal(c.getAttribute("data-id"));};});
+  [].forEach.call(p.children,function(c){c.onclick=function(e){if(e.target.closest("[data-external]"))return;openModal(c.getAttribute("data-id"));};});
 }
 function renderTech(){var c=$("techWall");c.innerHTML="";DATA.tech.forEach(function(t){c.insertAdjacentHTML("beforeend",'<span class="tech-item">'+ESC(t)+'</span>');});}
 function renderInterests(){var c=$("intGrid");c.innerHTML="";DATA.interests.forEach(function(x){c.insertAdjacentHTML("beforeend",'<div class="int-card"><span class="emoji">'+x[0]+'</span><small>'+ESC(x[1])+'</small></div>');});}
@@ -362,6 +365,7 @@ function openModal(id){
   var cat=$("mCat");cat.textContent=catLbl(pr.cat);cat.className="proj-cat "+catCls(pr.cat);
   $("mTitle").textContent=pr.title;$("mDesc").textContent=pr.desc;
   $("mFeats").innerHTML=pr.feats.map(function(f){return '<span class="m-feat">'+ESC(f)+'</span>';}).join("");
+  var visit=$("mVisit");if(pr.url){visit.href=pr.url;visit.hidden=false;}else{visit.removeAttribute("href");visit.hidden=true;}
   $("modal").classList.add("open");document.body.style.overflow="hidden";
 }
 function closeModal(){$("modal").classList.remove("open");document.body.style.overflow="";}
