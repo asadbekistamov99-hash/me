@@ -12,12 +12,12 @@ A creative, responsive personal portfolio introducing Asadbek's work at the inte
 ## Featured projects
 
 ### MedAI
-A healthcare-assistant product for Uzbek-speaking users. Its direction includes symptom-related guidance, medicine information, laboratory-result explanations and health reminders. It is designed as an informational support tool, not a replacement for professional medical diagnosis.
+A web-based healthcare-assistant project for Uzbek-speaking users. Its direction includes symptom-related guidance, medicine information, laboratory-result explanations and health reminders. It is designed as an informational support tool, not a replacement for professional medical diagnosis.
 
 ### Jarvis Ultra
-An Uzbek-language Android voice assistant evolved from the Kun Tartibi daily planner. It supports an offline Jarvis wake word, hands-free voice commands, task and deadline management, reminders, habit tracking, smart daily planning and long-term memory. Optional integrations include Google Calendar, Gmail, camera, files, contacts and notifications. The Android app targets Android 12–15.
+A web-based presentation of Jarvis Ultra, an Uzbek-language AI assistant evolved from the Kun Tartibi daily planner. It supports an offline Jarvis wake word, hands-free voice commands, task and deadline management, reminders, habit tracking, smart daily planning and long-term memory. Optional integrations include Google Calendar, Gmail, camera, files, contacts and notifications. The Android app targets Android 12–15.
 
-**Open the app:** https://kunlik-reja-two.vercel.app
+**Open the website:** https://kunlik-reja-two.vercel.app
 
 ### LinguaFlow
 A multilingual learning platform with an Uzbek-language interface for English, Russian, German, French, Spanish and Arabic. It combines lessons, vocabulary, listening and writing exercises, topic and level tests, learning games, spaced repetition, XP, streaks, achievements and an optional AI tutor. It also includes an administration area for managing learning content and users.
@@ -27,8 +27,6 @@ A multilingual learning platform with an Uzbek-language interface for English, R
 ### BSMI Anatomy
 A digital learning environment for medical students, focused on anatomy topics, Latin terminology, video lessons, quizzes and 3D learning materials.
 
-### SaNo Books
-A digital commerce project for books and school supplies, with a Telegram-based catalogue, cart and order-management workflow.
 
 Project descriptions distinguish product direction and documented capabilities from features that may still be in progress. External project buttons open the deployed application pages rather than linking directly to source-code repositories.
 
@@ -39,7 +37,7 @@ Project descriptions distinguish product direction and documented capabilities f
 - Responsive layout for desktop and mobile
 - Animated section reveals and smooth navigation
 - Filterable project cards with detail modals
-- Direct live-app links for Jarvis Ultra and LinguaFlow
+- Direct website links for Jarvis Ultra and LinguaFlow
 - Skills, technology stack, learning focus and interests
 - Contact links for Telegram, Instagram and email
 - GitHub Pages-compatible static site (HTML, CSS and vanilla JavaScript)
