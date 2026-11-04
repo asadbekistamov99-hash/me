@@ -10,6 +10,12 @@ const path=require('node:path');
  await page.route('http://127.0.0.1:8000/**',route=>{const pathname=new URL(route.request().url()).pathname;return route.fulfill({path:path.join(__dirname,'..',pathname==='/'?'index.html':pathname)});});
  await page.goto('http://127.0.0.1:8000/',{waitUntil:'domcontentloaded'});
  assert.equal(await page.locator('.project-card').count(),4);
+ assert.equal(await page.locator('.interest-art').count(),8);
+ assert.equal(new Set(await page.locator('.interest-art').evaluateAll(es=>es.map(e=>e.style.backgroundPosition))).size,8);
+ const iconImage=await page.locator('.interest-art').first().evaluate(e=>getComputedStyle(e).backgroundImage);
+ assert.match(iconImage,/interest-icons\.png/);
+ await page.evaluate(src=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>image.naturalWidth>0?resolve():reject(Error('Empty icon sheet'));image.onerror=()=>reject(Error('Icon sheet failed to load'));image.src=src.slice(5,-2);}),iconImage);
+
  await page.locator('#projects').scrollIntoViewIfNeeded();
  await page.waitForTimeout(900);
  for(const[id,color]of [['p1','rgb(255, 255, 255)'],['p2','rgb(1, 16, 39)'],['p4','rgb(255, 255, 255)']]){

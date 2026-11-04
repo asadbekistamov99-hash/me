@@ -366,7 +366,14 @@ function renderProjects(){
   [].forEach.call(p.children,function(c){c.onclick=function(e){if(e.target.closest("[data-external]"))return;openModal(c.getAttribute("data-id"));};});
 }
 function renderTech(){var c=$("techWall");c.innerHTML="";DATA.tech.forEach(function(t){c.insertAdjacentHTML("beforeend",'<span class="tech-item">'+ESC(t)+'</span>');});}
-function renderInterests(){var c=$("intGrid");c.innerHTML="";DATA.interests.forEach(function(x){c.insertAdjacentHTML("beforeend",'<div class="int-card"><span class="emoji">'+x[0]+'</span><small>'+ESC(x[1])+'</small></div>');});}
+function renderInterests(){
+  var c=$("intGrid"),symbols=["🩺","🤖","👨‍💻","⚽","♟️","🚀","🎬","🎨"];c.innerHTML="";
+  DATA.interests.forEach(function(x){
+    var i=symbols.indexOf(x[0]);
+    var icon=i<0?'<span class="emoji" aria-hidden="true">'+ESC(x[0])+'</span>':'<span class="interest-art" aria-hidden="true" style="background-position:'+(i%4)*100/3+'% '+Math.floor(i/4)*100+'%"></span>';
+    c.insertAdjacentHTML("beforeend",'<div class="int-card">'+icon+'<small>'+ESC(x[1])+'</small></div>');
+  });
+}
 function renderContacts(){var c=$("contactLinks");c.innerHTML="";DATA.contacts.forEach(function(k,i){c.insertAdjacentHTML("beforeend",'<a href="'+k.url+'" target="_blank" rel="noopener" class="btn '+(i%2===0?"btn-primary":"btn-ghost")+'">'+k.icon+' '+ESC(k.name)+'</a>');});}
 var modalTrigger=null;
 function openModal(id){
