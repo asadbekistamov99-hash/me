@@ -75,3 +75,14 @@ section:not(.hero){padding-top:105px;padding-bottom:105px}
 .int-card{gap:12px;padding:22px 16px}
 .int-card:hover .interest-art{transform:translateY(-5px) scale(1.08);filter:drop-shadow(0 12px 14px #635bff33)}
 @media(prefers-reduced-motion:reduce){.int-card:hover .interest-art{transform:none}}
+/* Shared realistic artwork also replaces decorative emoji throughout the UI. */
+.icon-3d{display:inline-block;width:28px;height:28px;flex:0 0 28px;vertical-align:middle;background-repeat:no-repeat;filter:drop-shadow(0 2px 3px #0002);pointer-events:none}
+.icon-interest{background-image:url('interest-icons.png');background-size:400% 200%}
+.icon-ui{background-image:url('ui-icons.png');background-size:500% 400%}
+.ic .icon-3d,.gi .icon-3d{width:34px;height:34px;flex-basis:34px}
+.info-card .ic,.skill-group h3 .gi{background:transparent;box-shadow:none}
+.float-badge,.chip,.t-item h3{display:flex;align-items:center;gap:8px}
+.chip .icon-3d,.float-badge .icon-3d{width:25px;height:25px;flex-basis:25px}
+.skill-tag,.tech-item{gap:7px}.skill-tag .icon-3d{width:24px;height:24px;flex-basis:24px}
+#themeToggle .icon-3d,#copyBtn .icon-3d{width:29px;height:29px;flex-basis:29px}
+.proj-media>span:not(.proj-cat)>.icon-3d{width:100px;height:100px}

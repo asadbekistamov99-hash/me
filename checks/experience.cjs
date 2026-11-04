@@ -16,6 +16,18 @@ const path=require('node:path');
  assert.match(iconImage,/interest-icons\.png/);
  await page.evaluate(src=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>image.naturalWidth>0?resolve():reject(Error('Empty icon sheet'));image.onerror=()=>reject(Error('Icon sheet failed to load'));image.src=src.slice(5,-2);}),iconImage);
 
+ assert(await page.locator('.icon-3d').count()>60,'Realistic icons across the entire site');
+ const uiImage=await page.locator('.icon-ui').first().evaluate(e=>getComputedStyle(e).backgroundImage);
+ await page.evaluate(src=>new Promise((resolve,reject)=>{const image=new Image();image.onload=resolve;image.onerror=()=>reject(Error('UI icon sheet failed'));image.src=src.slice(5,-2);}),uiImage);
+ const leftoverEmoji=()=>page.evaluate(()=>{
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const found=[];
+  while(walker.nextNode()){
+   const node=walker.currentNode;
+   if(!node.parentElement.closest('script,style,textarea,code')&&/\p{Extended_Pictographic}/u.test(node.data.replace(/[↗→↑✓✕☰©]/g,'')))found.push(node.data);
+  }
+  return found;
+ });
+ assert.deepEqual(await leftoverEmoji(),[],'No decorative emoji text remains');
  await page.locator('#projects').scrollIntoViewIfNeeded();
  await page.waitForTimeout(900);
  for(const[id,color]of [['p1','rgb(255, 255, 255)'],['p2','rgb(1, 16, 39)'],['p4','rgb(255, 255, 255)']]){
@@ -30,13 +42,14 @@ const path=require('node:path');
  assert.equal(await page.locator('[data-id="p4"] [data-external]').getAttribute('href'),'https://bsmianatomy.uz');
  assert.match(await page.locator('[data-id="p4"] [data-external]').textContent(),/Saytni ochish/);
  await page.locator('.filter-btn[data-f=""]').click();
+ assert.deepEqual(await leftoverEmoji(),[],'No emoji after project filtering');
  await card.hover();await page.mouse.move((await card.boundingBox()).x+50,(await card.boundingBox()).y+80);await page.waitForTimeout(100);
  assert.notEqual(await card.evaluate(e=>e.style.getPropertyValue('--rx')),'');
  await page.emulateMedia({reducedMotion:'reduce'});await page.waitForTimeout(100);
  assert.equal(await card.evaluate(e=>getComputedStyle(e).transform),'none');
  assert.equal(await page.locator('.ring').evaluate(e=>getComputedStyle(e).animationName),'none');
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.locator('#themeToggle').click();assert.equal(await page.locator('html').getAttribute('data-theme'),'light');await page.locator('#themeToggle').click();
+ await page.locator('#themeToggle').click();assert.equal(await page.locator('html').getAttribute('data-theme'),'light');assert.equal(await page.locator('#themeToggle .icon-3d').count(),1);assert.deepEqual(await leftoverEmoji(),[]);await page.locator('#themeToggle').click();assert.equal(await page.locator('#themeToggle .icon-3d').count(),1);
  for(const width of [360,390,768,1440]){
   await page.setViewportSize({width,height:900});await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(150);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`overflow at ${width}: `+JSON.stringify(await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>[e.tagName,e.className,Math.round(e.getBoundingClientRect().right)]).slice(0,12))));
