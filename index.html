@@ -179,8 +179,10 @@ footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;
 @media(max-width:920px){.hero-grid{grid-template-columns:1fr;text-align:center;gap:60px}.hero p.desc{margin:0 auto 32px}.hero-actions,.subtitle{justify-content:center}.about-grid{grid-template-columns:1fr}nav.desktop{display:none}#menuToggle{display:grid;place-items:center}}
 @media(max-width:640px){section{padding:70px 18px}.avatar-frame{width:250px;height:250px}.cards-grid{grid-template-columns:1fr}.contact-card{padding:40px 22px}}
 </style>
+<link rel="stylesheet" href="assets/experience.css">
 </head>
 <body>
+<div class="ambient" aria-hidden="true"></div>
 <div id="progress"></div><div id="bg-grid"></div><canvas id="particles"></canvas>
 
 <header id="header">
@@ -208,6 +210,7 @@ footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div class="hero-text">
+      <p class="hero-kicker">TIBBIYOT × TEXNOLOGIYA × KREATIVLIK</p>
       <span class="badge"><span class="dot"></span> G‘oyalarni foydali mahsulotlarga aylantiraman</span>
       <h1><span class="grad">ASADBEK</span><br><span class="grad2">ISTAMOV</span></h1>
       <div class="subtitle"><span>Medical student</span><span>•</span><span>Developer</span><span>•</span><span>AI builder</span></div>
@@ -216,6 +219,7 @@ footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;
         <a class="btn btn-primary" data-scroll="#projects">🚀 Loyihalarimni ko'rish</a>
         <a class="btn btn-ghost" data-scroll="#contact">💬 Men bilan bog'lanish</a>
       </div>
+      <div class="hero-stats" aria-label="Loyihalar haqida"><div><b>04</b><span>Raqamli loyiha</span></div><div><b>02</b><span>Ilova</span></div><div><b>02</b><span>Veb-sayt</span></div></div>
     </div>
     <div class="hero-visual">
       <div class="ring"></div>
@@ -302,8 +306,8 @@ footer em{font-style:normal;background:var(--grad);-webkit-background-clip:text;
 <button id="toTop" aria-label="Yuqoriga">↑</button>
 
 <div class="modal" id="modal">
-  <div class="modal-box">
-    <div class="modal-media"><button class="modal-close" id="modalClose">✕</button><img id="mImg" alt=""><span class="proj-cat cat-other" id="mCat">Loyiha</span></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="mTitle" tabindex="-1">
+    <div class="modal-media"><button class="modal-close" id="modalClose" aria-label="Oynani yopish">✕</button><img id="mImg" alt=""><span class="proj-cat cat-other" id="mCat">Loyiha</span></div>
     <div class="modal-body"><h3 id="mTitle"></h3><p class="mdesc" id="mDesc"></p><div class="modal-feat" id="mFeats"></div><a id="mVisit" class="btn btn-primary" target="_blank" rel="noopener noreferrer" hidden>Saytni ochish ↗</a></div>
   </div>
 </div>
@@ -356,16 +360,18 @@ function renderProjects(){
     if(curFilter&&catKey(pr.cat)!==curFilter)return;
     var img=pr.img?'<img src="'+pr.img+'" alt="'+ESC(pr.title)+'">':'<span style="font-size:4rem;opacity:.75">'+(pr.icon||"🚀")+'</span>';
     var f=pr.feats.slice(0,3).map(function(x){return '<span class="feat">'+ESC(x)+'</span>';}).join("");
-    var action=pr.url?'<a class="proj-link" href="'+pr.url+'" target="_blank" rel="noopener noreferrer" data-external>Ilovani ochish ↗</a>':'<span class="proj-link">Batafsil →</span>';
-    p.insertAdjacentHTML("beforeend",'<article class="project-card" data-id="'+pr.id+'"><div class="proj-media"><span class="proj-cat '+catCls(pr.cat)+'">'+catLbl(pr.cat)+'</span>'+img+'</div><div class="proj-body"><h3>'+ESC(pr.title)+'</h3><p>'+ESC(pr.desc)+'</p><div class="proj-feat">'+f+'</div>'+action+'</div></article>');
+    var action=pr.url?'<a class="proj-link" href="'+pr.url+'" target="_blank" rel="noopener noreferrer" data-external>'+(pr.cat==="app"?"Ilovani ochish":"Saytni ochish")+' ↗</a>':'<span class="proj-link">Batafsil →</span>';
+    p.insertAdjacentHTML("beforeend",'<article class="project-card" tabindex="0" data-id="'+pr.id+'"><div class="proj-media"><span class="proj-cat '+catCls(pr.cat)+'">'+catLbl(pr.cat)+'</span>'+img+'</div><div class="proj-body"><h3>'+ESC(pr.title)+'</h3><p>'+ESC(pr.desc)+'</p><div class="proj-feat">'+f+'</div>'+action+'</div></article>');
   });
   [].forEach.call(p.children,function(c){c.onclick=function(e){if(e.target.closest("[data-external]"))return;openModal(c.getAttribute("data-id"));};});
 }
 function renderTech(){var c=$("techWall");c.innerHTML="";DATA.tech.forEach(function(t){c.insertAdjacentHTML("beforeend",'<span class="tech-item">'+ESC(t)+'</span>');});}
 function renderInterests(){var c=$("intGrid");c.innerHTML="";DATA.interests.forEach(function(x){c.insertAdjacentHTML("beforeend",'<div class="int-card"><span class="emoji">'+x[0]+'</span><small>'+ESC(x[1])+'</small></div>');});}
 function renderContacts(){var c=$("contactLinks");c.innerHTML="";DATA.contacts.forEach(function(k,i){c.insertAdjacentHTML("beforeend",'<a href="'+k.url+'" target="_blank" rel="noopener" class="btn '+(i%2===0?"btn-primary":"btn-ghost")+'">'+k.icon+' '+ESC(k.name)+'</a>');});}
+var modalTrigger=null;
 function openModal(id){
   var pr=null;DATA.projects.forEach(function(x){if(x.id===id)pr=x;});if(!pr)return;
+  modalTrigger=document.activeElement;
   $("mImg").parentElement.dataset.id=pr.id;
   $("mImg").src=pr.img||"https://via.placeholder.com/400x150?text="+encodeURIComponent(pr.title);
   $("mImg").alt=pr.title;
@@ -373,9 +379,9 @@ function openModal(id){
   $("mTitle").textContent=pr.title;$("mDesc").textContent=pr.desc;
   $("mFeats").innerHTML=pr.feats.map(function(f){return '<span class="m-feat">'+ESC(f)+'</span>';}).join("");
   var visit=$("mVisit");if(pr.url){visit.href=pr.url;visit.hidden=false;}else{visit.removeAttribute("href");visit.hidden=true;}
-  $("modal").classList.add("open");document.body.style.overflow="hidden";
+  $("modal").classList.add("open");document.body.style.overflow="hidden";$("modalClose").focus();
 }
-function closeModal(){$("modal").classList.remove("open");document.body.style.overflow="";}
+function closeModal(){$("modal").classList.remove("open");document.body.style.overflow="";if(modalTrigger)modalTrigger.focus({preventScroll:true});}
 $("modalClose").onclick=closeModal;
 $("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});
 $("copyBtn").onclick=function(){
@@ -387,7 +393,7 @@ function applyTheme(t){document.documentElement.dataset.theme=t;$("themeToggle")
 $("themeToggle").onclick=function(){applyTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");};
 try{var th=localStorage.getItem("theme");if(th)applyTheme(th);}catch(e){}
 /* smooth scroll */
-function goTo(sel){var t=document.querySelector(sel);if(t)t.scrollIntoView({behavior:"smooth",block:"start"});}
+function goTo(sel){var t=document.querySelector(sel);if(t)t.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});}
 [].forEach.call(document.querySelectorAll("[data-scroll]"),function(a){a.addEventListener("click",function(e){e.preventDefault();goTo(a.getAttribute("data-scroll"));$("mobileMenu").classList.remove("open");});});
 /* header/progress/active/top */
 var hdr=$("header"),prog=$("progress"),toTop=$("toTop"),navAs=[].concat([].slice.call(document.querySelectorAll("nav.desktop a")));
@@ -397,7 +403,7 @@ addEventListener("scroll",onScroll);onScroll();
 /* reveal */
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target);}});},{threshold:.1});
 function observe(){[].forEach.call(document.querySelectorAll(".reveal"),function(x){io.observe(x);});}
-$("toTop").onclick=function(){window.scrollTo({top:0,behavior:"smooth"});};
+$("toTop").onclick=function(){window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});};
 $("menuToggle").onclick=function(){$("mobileMenu").classList.toggle("open");};
 [].forEach.call($("mobileMenu").querySelectorAll("a"),function(a){a.onclick=function(){$("mobileMenu").classList.remove("open");};});
 function renderAll(){renderSkills();renderTech();renderInterests();renderProjects();renderContacts();renderFilters();}
@@ -406,6 +412,7 @@ $("year").textContent=new Date().getFullYear();
 renderAll();observe();
 
 </script>
+<script src="assets/experience.js"></script>
 </body>
 </html>
 
