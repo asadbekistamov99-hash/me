@@ -334,10 +334,10 @@ function saveData(){try{localStorage.setItem(STORE_KEY,JSON.stringify(DATA));}ca
 function ESC(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function catKey(c){return ["med","edu","ecom","web"].indexOf(c)>=0?c:"other";}
 function catCls(c){return "cat-"+catKey(c);}
-function catLbl(c){var m={med:"AI + Sog'liq",edu:"Tibbiy ta'lim",ecom:"E-commerce",other:"AI yordamchi"};return m[c]||c;}
+function catLbl(c){var m={med:"AI + Sog'liq",edu:"Tibbiy ta'lim",ecom:"E-commerce",web:"Veb-sayt",other:"AI yordamchi"};return m[c]||c;}
 var curFilter="";
 function renderFilters(){
-  var m={med:"AI + Sog'liq",edu:"Tibbiy ta'lim",ecom:"E-commerce",other:"Boshqa"};
+  var m={med:"AI + Sog'liq",edu:"Tibbiy ta'lim",ecom:"E-commerce",web:"Veb-sayt",other:"Boshqa"};
   var h='<button class="filter-btn active" data-f="">Barchasi</button>';
   for(var k in m){if(DATA.projects.some(function(p){return catKey(p.cat)===k;}))h+='<button class="filter-btn" data-f="'+k+'">'+m[k]+'</button>';}
   $("filters").innerHTML=h;
